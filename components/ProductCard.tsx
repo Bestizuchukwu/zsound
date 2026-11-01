@@ -5,7 +5,7 @@ import { products } from '@/lib/data';
 export function ProductCard({ product }: { product: (typeof products)[number] }) {
   return (
     <article className="product-card">
-      <div className="product-image-wrap">
+      <div className={`product-image-wrap accent-${product.accent}`}>
         <Image
           src={product.image}
           alt={product.name}

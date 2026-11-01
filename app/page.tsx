@@ -1,6 +1,6 @@
-import { ProductCard } from '@/components/ProductCard';
-import { products } from '@/lib/data';
 import Link from 'next/link';
+import { products } from '@/lib/data';
+import { ProductCard } from '@/components/ProductCard';
 
 export default function HomePage() {
   return (

@@ -1,10 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Product | ZSOUND',
-};
-
 const product = {
   id: 1,
   name: 'Aster Elite Guitar',
@@ -17,6 +13,10 @@ const product = {
   specs: ['Mahogany body', 'HSS pickups', '24.75" scale', '7.5 lb'],
   image:
     'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80',
+};
+
+export const metadata: Metadata = {
+  title: 'Product | ZSOUND',
 };
 
 export default function ProductPage() {
