@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { products } from '@/lib/data';
+import { type Product } from '@/lib/data';
 
-export function ProductCard({ product }: { product: (typeof products)[number] }) {
+type Props = {
+  product: Product;
+  onAdd?: (product: Product) => void;
+};
+
+export function ProductCard({ product, onAdd }: Props) {
   return (
     <article className="product-card">
       <div className={`product-image-wrap accent-${product.accent}`}>
@@ -29,7 +34,9 @@ export function ProductCard({ product }: { product: (typeof products)[number] })
             <strong>${product.price}</strong>
             <span>${product.oldPrice}</span>
           </div>
-          <Link href={`/product/${product.id}`} className="mini-btn">View</Link>
+          <button type="button" className="mini-btn" onClick={() => onAdd?.(product)}>
+            Add
+          </button>
         </div>
       </div>
     </article>

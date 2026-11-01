@@ -1,7 +1,28 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { getCart, getCartTotal } from '@/lib/cart';
 
 export default function CheckoutPage() {
-  const orderTotal = 2999;
+  const [total, setTotal] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const sync = () => {
+      const items = getCart();
+      setCartCount(items.reduce((sum, item) => sum + item.quantity, 0));
+      setTotal(getCartTotal());
+    };
+
+    sync();
+    window.addEventListener('zsound:cart', sync);
+    return () => window.removeEventListener('zsound:cart', sync);
+  }, []);
+
+  const shipping = cartCount ? 120 : 0;
+  const warranty = cartCount ? 180 : 0;
+  const grandTotal = total + shipping + warranty;
 
   return (
     <main className="checkout-shell">
@@ -61,19 +82,19 @@ export default function CheckoutPage() {
           <h2>Order summary</h2>
           <div className="summary-line">
             <span>Subtotal</span>
-            <strong>$2,699</strong>
+            <strong>${total.toFixed(2)}</strong>
           </div>
           <div className="summary-line">
             <span>Shipping</span>
-            <strong>$120</strong>
+            <strong>${shipping.toFixed(2)}</strong>
           </div>
           <div className="summary-line">
             <span>Warranty</span>
-            <strong>$180</strong>
+            <strong>${warranty.toFixed(2)}</strong>
           </div>
           <div className="summary-total">
             <span>Total</span>
-            <strong>${orderTotal.toLocaleString()}</strong>
+            <strong>${grandTotal.toFixed(2)}</strong>
           </div>
           <button type="button" className="primary-btn wide-btn">Pay now</button>
         </aside>

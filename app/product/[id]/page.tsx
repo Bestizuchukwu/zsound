@@ -1,25 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
-const product = {
-  id: 1,
-  name: 'Aster Elite Guitar',
-  price: 1299,
-  oldPrice: 1599,
-  rating: 4.9,
-  badge: 'Best Seller',
-  description:
-    'Premium alder body, satin-finished neck, precision pickups, and a warm tone designed for stage-ready performance.',
-  specs: ['Mahogany body', 'HSS pickups', '24.75" scale', '7.5 lb'],
-  image:
-    'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80',
-};
+import { notFound } from 'next/navigation';
+import { products } from '@/lib/data';
+import { addToCart } from '@/lib/cart';
 
 export const metadata: Metadata = {
   title: 'Product | ZSOUND',
 };
 
-export default function ProductPage() {
+export default function ProductPage({ params }: { params: { id: string } }) {
+  const product = products.find((item) => item.id === Number(params.id));
+
+  if (!product) {
+    notFound();
+  }
+
   return (
     <main className="product-shell">
       <div className="product-back">
@@ -29,7 +24,14 @@ export default function ProductPage() {
       <div className="product-layout">
         <div className="product-image-panel">
           <div className="product-spotlight">
-            <img src={product.image} alt={product.name} />
+            <img src={product.gallery[0]} alt={product.name} />
+          </div>
+          <div className="gallery-row">
+            {product.gallery.map((image, index) => (
+              <div key={`${product.id}-${index}`} className="gallery-thumb">
+                <img src={image} alt={`${product.name} view ${index + 1}`} />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -51,7 +53,9 @@ export default function ProductPage() {
           </div>
 
           <div className="purchase-actions">
-            <button type="button" className="primary-btn">Add to cart</button>
+            <button type="button" className="primary-btn" onClick={() => addToCart(product)}>
+              Add to cart
+            </button>
             <Link href="/checkout" className="secondary-btn">Buy now</Link>
           </div>
         </div>

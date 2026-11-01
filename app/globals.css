@@ -118,14 +118,19 @@ img {
 .secondary-btn,
 .mini-btn,
 .text-link,
-.back-link {
+.back-link,
+.filter-pill,
+.qty-button,
+.text-btn {
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .cart-link,
 .primary-btn,
 .secondary-btn,
-.mini-btn {
+.mini-btn,
+.filter-pill,
+.qty-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -141,7 +146,8 @@ img {
 
 .primary-btn,
 .secondary-btn,
-.mini-btn {
+.mini-btn,
+.filter-pill {
   padding: 12px 18px;
   border: 1px solid transparent;
 }
@@ -162,6 +168,27 @@ img {
   padding: 9px 12px;
   background: rgba(100, 243, 215, 0.08);
   border-color: rgba(100, 243, 215, 0.2);
+  color: var(--cyan);
+}
+
+.filter-row {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-pill {
+  background: rgba(255,255,255,0.02);
+  border-color: var(--line);
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding: 10px 14px;
+}
+
+.filter-pill.active {
+  background: rgba(100, 243, 215, 0.12);
+  border-color: rgba(100, 243, 215, 0.4);
   color: var(--cyan);
 }
 
@@ -272,6 +299,7 @@ img {
   background: linear-gradient(135deg, #4f8cff 0%, #111827 25%, #f4b95f 100%);
   box-shadow: inset 0 0 0 12px rgba(255,255,255,.16);
   transform: rotate(-11deg);
+  animation: float 4s ease-in-out infinite;
 }
 
 .guitar-figure::before {
@@ -435,13 +463,25 @@ img {
   border-radius: 22px;
   overflow: hidden;
   box-shadow: 0 16px 32px rgba(0,0,0,.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 36px rgba(0,0,0,.26);
 }
 
 .product-image-wrap {
   position: relative;
   height: 240px;
-  background: #0a101a;
 }
+
+.accent-gold { background: linear-gradient(135deg, rgba(249, 215, 126, 0.18), #0c1220); }
+.accent-cyan { background: linear-gradient(135deg, rgba(100, 243, 215, 0.18), #0c1220); }
+.accent-amber { background: linear-gradient(135deg, rgba(249, 160, 92, 0.2), #0c1220); }
+.accent-pink { background: linear-gradient(135deg, rgba(214, 120, 255, 0.2), #0c1220); }
+.accent-violet { background: linear-gradient(135deg, rgba(157, 114, 255, 0.2), #0c1220); }
+.accent-blue { background: linear-gradient(135deg, rgba(100, 150, 255, 0.18), #0c1220); }
 
 .product-image {
   object-fit: cover;
@@ -508,11 +548,20 @@ img {
 }
 
 .text-link,
-.back-link {
+.back-link,
+.text-btn {
   color: var(--muted);
   display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+
+.text-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #ff9f9f;
+  cursor: pointer;
 }
 
 .checkout-header,
@@ -613,6 +662,23 @@ input {
   gap: 16px;
 }
 
+.empty-cart-box {
+  text-align: center;
+  padding: 32px 20px;
+  border: 1px dashed var(--line);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.02);
+}
+
+.empty-cart-box h3 {
+  margin: 0 0 12px;
+}
+
+.empty-cart-box p {
+  margin: 0 0 20px;
+  color: var(--muted);
+}
+
 .cart-item {
   display: flex;
   align-items: center;
@@ -627,15 +693,12 @@ input {
   width: 96px;
   height: 96px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  background-size: cover;
+  background-position: center;
 }
 
-.thumb-guitar {
-  background: linear-gradient(135deg, #2d4a96, #111827 45%, #f9d77e 100%);
-}
-
-.thumb-headphones {
-  background: linear-gradient(135deg, #64f3d7, #111827 50%, #c89bff 100%);
+.cart-copy {
+  flex: 1;
 }
 
 .cart-copy h3 {
@@ -646,6 +709,24 @@ input {
 .cart-copy p {
   margin: 8px 0 0;
   color: var(--muted);
+}
+
+.cart-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.qty-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  padding: 0;
+  cursor: pointer;
 }
 
 .cart-amount {
@@ -670,10 +751,30 @@ input {
   position: relative;
   overflow: hidden;
   border-radius: 22px;
-  min-height: 520px;
+  min-height: 420px;
 }
 
 .product-spotlight img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.gallery-thumb {
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  height: 100px;
+}
+
+.gallery-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -740,6 +841,11 @@ input {
   gap: 14px;
   flex-wrap: wrap;
   margin-top: 24px;
+}
+
+@keyframes float {
+  0%, 100% { transform: rotate(-11deg) translateY(0); }
+  50% { transform: rotate(-11deg) translateY(-10px); }
 }
 
 @media (max-width: 900px) {
