@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ZSOUND is a mobile-first store for musical instruments and accessories."
+    />
+    <title>ZSOUND | Musical Instruments</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <img src="assets/zsound-logo.svg" alt="ZSOUND logo" class="brand-logo" />
+          <div class="brand-text">
+            <span class="brand-name">ZSOUND</span>
+            <span class="brand-tag">Music Store</span>
+          </div>
+        </div>
+
+        <button class="menu-btn" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </header>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home" class="active">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#categories">Categories</a>
+        <a href="#support">Support</a>
+      </nav>
+
+      <main id="home">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Play louder. Play better.</p>
+            <h1>Find your sound with premium instruments.</h1>
+            <p class="hero-text">
+              Shop guitars, keyboards, drums, and accessories from trusted brands at
+              competitive prices.
+            </p>
+            <div class="cta-row">
+              <a href="#shop" class="primary-btn">Shop now</a>
+              <a href="#categories" class="secondary-btn">Browse deals</a>
+            </div>
+            <div class="hero-meta">
+              <div>
+                <strong>2.5k+</strong>
+                <span>happy buyers</span>
+              </div>
+              <div>
+                <strong>4.9/5</strong>
+                <span>customer rating</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Featured instrument illustration">
+            <div class="visual-card instrument-card guitar-card">
+              <div class="guitar-shape">
+                <span class="guitar-neck"></span>
+              </div>
+              <div class="product-badge">Best Seller</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="promo-strip">
+          <div>
+            <span class="promo-label">Flash sale</span>
+            <strong>Up to 30% off selected gear</strong>
+          </div>
+          <button>Claim offer</button>
+        </section>
+
+        <section id="categories" class="categories">
+          <div class="section-heading">
+            <p>Popular categories</p>
+            <h2>Discover your next favorite sound</h2>
+          </div>
+
+          <div class="chips" role="tablist" aria-label="Product categories">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="guitar">Guitars</button>
+            <button class="chip" data-filter="keyboard">Keyboards</button>
+            <button class="chip" data-filter="drums">Drums</button>
+            <button class="chip" data-filter="audio">Audio</button>
+          </div>
+        </section>
+
+        <section id="shop" class="products">
+          <div class="section-heading">
+            <p>Featured collection</p>
+            <h2>Top picks for every musician</h2>
+          </div>
+
+          <div class="product-grid" id="productGrid"></div>
+        </section>
+
+        <section class="benefits">
+          <div class="benefit-card">
+            <span class="icon">🚚</span>
+            <h3>Fast delivery</h3>
+            <p>Quick shipping across cities with secure packaging.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon">🛡️</span>
+            <h3>Trusted quality</h3>
+            <p>Authentic products backed by warranty and support.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon">🎵</span>
+            <h3>Expert advice</h3>
+            <p>Find the right instrument for your style and skill level.</p>
+          </div>
+        </section>
+      </main>
+
+      <aside class="cart-panel" id="cartPanel" aria-live="polite">
+        <div class="cart-header">
+          <h3>Your cart</h3>
+          <button class="close-cart" aria-label="Close cart">×</button>
+        </div>
+
+        <div class="cart-items" id="cartItems">
+          <p class="empty-cart">Your cart is empty.</p>
+        </div>
+
+        <div class="cart-summary">
+          <div>
+            <span>Subtotal</span>
+            <strong id="cartTotal">$0.00</strong>
+          </div>
+          <button class="checkout-btn">Checkout</button>
+        </div>
+      </aside>
+
+      <button class="cart-toggle" id="cartToggle" aria-label="Open cart">
+        🛒 <span id="cartCount">0</span>
+      </button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
